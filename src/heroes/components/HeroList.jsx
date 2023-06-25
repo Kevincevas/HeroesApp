@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { getHeroesByPublisher } from '../helpers'
 import { HeroCard } from './';
 
 export const HeroList = ({ publisher }) => {
 
-    const heroes = getHeroesByPublisher( publisher );
+    const heroes = useMemo( () => getHeroesByPublisher( publisher ), [publisher] ); //si el id es diferente dispara la funcion, caso contrario no vuelve a llamarse
 
 
   return (
