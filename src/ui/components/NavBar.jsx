@@ -1,13 +1,18 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../auth/context/AuthContext';
 
 
 export const Navbar = () => {
+
+
+    const {user, logout} = useContext(AuthContext);
 
     // Navegar
     const navigate = useNavigate();
 
     const onLogout = () => {
+        logout();
         navigate('/login',{replace:true}); // replace: evita que el usuario pueda regresar a la interfaz anterior
     }
 
@@ -53,7 +58,8 @@ export const Navbar = () => {
             <div className="navbar-collapse collapse w-100 order-3 dual-collapse2 d-flex justify-content-end"> 
                 <ul className="navbar-nav ml-auto">
                     <span className='nav-item nav-link text-info'>
-                        Kevin
+                        {/* signo de interrogacion indica que si es nulo no continue, caso contrario si */}
+                        {user?.name} 
                     </span>
                     <button onClick={onLogout}
                         className='nav-item nav-link btn'
